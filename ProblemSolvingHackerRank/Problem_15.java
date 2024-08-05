@@ -1,80 +1,61 @@
-import java.util.*;
 
-public class  Problem_15 
-{
 
-    // Method to calculate GCD of two numbers
-    public static int gcd(int a, int b) {
-        while (b != 0) {
-            int temp = b;
-            b = a % b;
-            a = temp;
-        }
-        return a;
-    }
+import java.util.Scanner;
 
-    // Method to calculate LCM of two numbers
-    public static int lcm(int a, int b) {
-        return a * (b / gcd(a, b));
-    }
+public class Problem_15 {
 
-    // Method to calculate GCD of an array
-    public static int gcdArray(int[] arr) {
-        int result = arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            result = gcd(result, arr[i]);
-            if (result == 1) {
-                return 1; // If GCD becomes 1, return early
-            }
-        }
-        return result;
-    }
-
-    // Method to calculate LCM of an array
-    public static int lcmArray(int[] arr) {
-        int result = arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            result = lcm(result, arr[i]);
-        }
-        return result;
-    }
-
-    // Method to find numbers between two sets
-    public static int getTotalX(int[] a, int[] b) {
-        int lcmA = lcmArray(a);
-        int gcdB = gcdArray(b);
-
-        int count = 0;
-        for (int i = lcmA; i <= gcdB; i += lcmA) {
-            if (gcdB % i == 0) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    // Main method for testing
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        
+      Scanner obj = new Scanner(System.in);
+      int a = obj.nextInt();
+      int b = obj.nextInt();
 
-        // Read input for array a
-        int n = scanner.nextInt();
-        int m = scanner.nextInt();
-        int[] a = new int[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = scanner.nextInt();
+      
+      int[] arrOne = new int[a];
+      for(int i=0; i<a; i++) {
+          arrOne[i] = obj.nextInt();
         }
 
-        // Read input for array b
-        int[] b = new int[m];
-        for (int i = 0; i < m; i++) {
-            b[i] = scanner.nextInt();
+        int[] arrTwo = new int[b];
+        for(int i=0; i<b; i++) {
+            arrTwo[i] = obj.nextInt();
         }
 
-        // Get the result and print it
-        int totalX = getTotalX(a, b);
-        System.out.println(totalX);
 
-        scanner.close();
+        int x = arrOne[a-1];
+        int y = arrTwo[0];
+        
+       int count=0;
+       while(x<=y) {
+        int temp = 0;
+     
+        for(int i=0; i<a; i++){
+            if(x%arrOne[i] != 0) {
+                temp=1;
+                break;
+            }   
+        }
+        if(temp == 0 ) {
+
+            for(int i=0; i<b; i++){
+                if(arrTwo[i]%x != 0) {
+                    temp=1;
+                    break;
+                }   
+            }
+        }
+
+        
+        if(temp==0){
+            count++;
+        }
+        x++;
+
     }
+
+        System.out.println("score:"+ count);
+        
+    }
+    
+
 }
